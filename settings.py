@@ -62,7 +62,7 @@ ROOMS = [
 # for flexibility, you can set it in the environment variable OTREE_AUTH_LEVEL
 AUTH_LEVEL = environ.get('OTREE_AUTH_LEVEL')
 
-ADMIN_USERNAME = 'admin'
+ADMIN_USERNAME = 'test_user'
 # for security, best to set admin password in an environment variable
 ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 
