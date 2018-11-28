@@ -1,0 +1,26 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Please entrer your <b id="blue">10-digit</b> code
+{% endblock %}
+
+{% block content %}
+<p>
+    {% formfield player.code label="" %}
+
+    After clicking the <b>Next</b> button the task will start.
+
+    <br><br>
+
+    {% next_button %}
+</p>
+{% endblock %}
+
+{% block styles %}
+    <style type="text/css">
+        #blue {
+            color: #2962FF
+        }
+    </style>
+{% endblock %}

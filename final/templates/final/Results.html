@@ -1,0 +1,32 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+The task is over
+{% endblock %}
+
+{% block content %}
+
+<p>
+    Your scored <b id="blue">{{ participant.payoff }}</b> in the task.
+
+    <br><br>
+
+    Please return to the previous window. You will be asked to provide the following password:
+
+    <br><br>
+
+     <center><h1 id="blue">nagackwx</font></center>
+</p>
+
+
+{% endblock %}
+
+{% block styles %}
+    <style type="text/css">
+        #blue {
+            color: #2962FF
+        }
+    </style>
+{% endblock %}
+

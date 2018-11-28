@@ -1,0 +1,82 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+        <span size="25" id="blue">{{ word }}</span>  <span color="black">(word {{ word_show }}
+        out of {{ Constants.num_words }})</span>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+      <div class="col-sm-6 border rounded">
+          <br>
+    {% formfield player.submitted_answer label="" %}
+
+    <button class="otree-btn-next btn btn-primary next-button otree-next-button">Submit</button>
+
+    <br><br>
+    <!--
+    Hidden variable that indicates whether we should show the next word in the list.
+    The button sets its value to 1, that indicates show the next word.
+     -->
+    <input type="hidden" value="0" name="word_increment" id="word_increment"/>
+    <button class="btn btn-danger btn-large" onclick="$('#word_increment').val(1)">Go to next word</button>
+    <!--
+    -->
+    <br>
+    <br>
+      </div>
+      <div class="col-sm-6 border rounded">
+        <p>
+          <h4>Rules of the task</h4>
+          <small>
+            <ul>
+                <li>Sub-words must consist of 4 letters or more</li>
+                <li>Each letter of the large word can be used only once</li>
+                <li>Only alpha-numeric letters (a….z) are allowed</li>
+                <li>Proper nouns (names, cities, etc.) and the complete large word are not allowed</li>
+                <li>Plurals and verb conjugations are allowed</li>
+            </ul>
+          </small>
+        </p>
+      </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+      <div class="col-sm-12 border rounded">
+        <table class="table">
+            <tr>
+                <th>Submitted Words</th>
+                <th>Points</th>
+                <th>Total Points</th>
+            </tr>
+            {% for p in player_in_previous_rounds %}
+                <!--
+                When the 'Next word' button is clicked, the submitted_answer field is submitted and stored but the payoffs
+                are not calculated. Since we do not want to show those values in the list, we can check whether the
+                payoffs have been calculated as a show condition
+                -->
+                {% if p.payoff_score is not None %}
+                <tr>
+                    <td>{{ p.submitted_answer }}</td>
+                    <td>{{ p.payoff_score }}</td>
+                    <td>{{ p.total_payoff }}</td>
+                </tr>
+                {%  endif %}
+            {% endfor %}
+        </table>
+      </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block styles %}
+    <style type="text/css">
+        #blue {
+            color: #2962FF
+        }
+    </style>
+{% endblock %}
