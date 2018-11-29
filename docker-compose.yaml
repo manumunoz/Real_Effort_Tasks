@@ -23,8 +23,7 @@ services:
     tmpfs:
       - "/tmp"
       - "/run"
-    networks:
-      db-net:
+    network_mode: "bridge"
 
   otree:
     # if using Docker Hub, leave "build: ./" commented out.
@@ -42,19 +41,13 @@ services:
     volumes:
       - "otree-resetdb:/opt/init"
     # Uncomment for live editing
-    #   - ./:/opt/otree
-    # command:
-    #   - "otree"
-    #   - "runserver"
-    #   - "0.0.0.0:80"
+    #  - ./:/opt/otree
     restart: always
     logging:
       options:
         max-size: "10m"
         max-file: "3"
-    networks:
-      - db-net
-      - redis-net
+    network_mode: "bridge"
 
   redis:
     image: redis
@@ -65,13 +58,9 @@ services:
         max-file: "3"
     restart: always
     read_only: true
-    networks:
-      - redis-net
+    network_mode: "bridge"
 
 volumes:
   database:
   otree-resetdb:
 
-networks:
-  db-net:
-  redis-net:
