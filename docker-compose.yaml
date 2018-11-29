@@ -23,7 +23,8 @@ services:
     tmpfs:
       - "/tmp"
       - "/run"
-    network_mode: "bridge"
+    networks:
+      emm11_net:
 
   otree:
     # if using Docker Hub, leave "build: ./" commented out.
@@ -47,7 +48,8 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-    network_mode: "bridge"
+    networks:
+      emm11_net:
 
   redis:
     image: redis
@@ -58,9 +60,13 @@ services:
         max-file: "3"
     restart: always
     read_only: true
-    network_mode: "bridge"
+    networks:
+      emm11_net:
 
 volumes:
   database:
   otree-resetdb:
 
+networks:
+  emm11_net:
+    external: true
