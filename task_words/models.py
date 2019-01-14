@@ -89,19 +89,37 @@ class Player(BasePlayer):
             self.word_show = self.in_round(self.round_number-1).word_show
         return self.session.vars['questions'][self.word_show-1]
 
+    # THIS IS THE ORIGINAL CODE
+    # def word_check(self):
+    #     if self.submitted_answer in Constants.words[self.word_show] and \
+    #             self.submitted_answer not in self.participant.vars[Constants.questions[self.word_show]['question']]:
+    #         self.participant.vars[Constants.questions[self.word_show]['question']].append(self.submitted_answer)
+    #
+    #         self.is_correct = True
+    #         # self.payoff_score = (len(self.submitted_answer) - 4)
+    #         self.payoff_score = (max(len(self.submitted_answer),4)-3)
+    #     else:
+    #         self.is_correct = False
+    #         # self.payoff_score = -1 * (len(self.submitted_answer) - 4)
+    #         self.payoff_score = -1 * (max(len(self.submitted_answer),4)-3)
+    #
+    #
+    #     self.payoff += c(self.payoff_score)
+    #     self.total_payoff = c(sum([p.payoff for p in self.in_all_rounds()]))
+
+    # THIS IS THE DEBUG CODE
     def word_check(self):
         if self.submitted_answer in Constants.words[self.word_show] and \
-                self.submitted_answer not in self.participant.vars[Constants.questions[self.word_show]['question']]:
-            self.participant.vars[Constants.questions[self.word_show]['question']].append(self.submitted_answer)
+                self.submitted_answer not in self.participant.vars[Constants.questions[self.word_show-1]['question']]:
+            self.participant.vars[Constants.questions[self.word_show-1]['question']].append(self.submitted_answer)
 
             self.is_correct = True
             # self.payoff_score = (len(self.submitted_answer) - 4)
-            self.payoff_score = (max(len(self.submitted_answer),4)-3)
+            self.payoff_score = (max(len(self.submitted_answer), 4) - 3)
         else:
             self.is_correct = False
             # self.payoff_score = -1 * (len(self.submitted_answer) - 4)
-            self.payoff_score = -1 * (max(len(self.submitted_answer),4)-3)
-
+            self.payoff_score = -1 * (max(len(self.submitted_answer), 4) - 3)
 
         self.payoff += c(self.payoff_score)
         self.total_payoff = c(sum([p.payoff for p in self.in_all_rounds()]))
