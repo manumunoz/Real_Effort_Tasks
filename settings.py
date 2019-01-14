@@ -12,6 +12,7 @@ from os import environ
 # ]
 
 
+
 SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 1.00,
     'participation_fee': 0.00,
